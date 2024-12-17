@@ -1,0 +1,24 @@
+2024-12-17 09:44:14,832: Key pressed: c
+2024-12-17 09:44:27,735: Key pressed: s
+2024-12-17 09:44:28,055: Key pressed: s
+2024-12-17 09:44:28,941: Key pressed: d
+2024-12-17 09:44:29,213: Key pressed: s
+2024-12-17 09:44:29,482: Key pressed: f
+2024-12-17 09:44:29,741: Key pressed: s
+2024-12-17 09:44:29,983: Key pressed: f
+2024-12-17 09:44:40,063: Keylogger stopped
+2024-12-17 09:45:59,098: Key pressed: c
+2024-12-17 09:45:59,454: Key pressed: c
+2024-12-17 09:45:59,526: Key pressed: d
+2024-12-17 09:45:59,776: Key pressed: v
+2024-12-17 09:46:00,230: Key pressed: h
+2024-12-17 09:46:00,467: Key pressed: d
+2024-12-17 09:46:00,802: Key pressed: j
+2024-12-17 09:46:00,908: Key pressed: f
+2024-12-17 09:46:01,178: Key pressed: d
+2024-12-17 09:46:01,269: Key pressed: t
+2024-12-17 09:46:01,488: Key pressed: d
+2024-12-17 09:46:01,649: Key pressed: r
+2024-12-17 09:46:01,862: Key pressed: f
+2024-12-17 09:46:02,077: Key pressed: d
+2024-12-17 09:46:12,085: Keylogger stopped
