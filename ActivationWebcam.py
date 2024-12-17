@@ -40,7 +40,7 @@ def motion_detection():
                 log_file.write(f"{current_time} il y a eu un mouvement chez vous\n")
 
             # Prendre une photo tous les 20 mouvements
-            if motion_counter % 20000 == 0:
+            if motion_counter % 10 == 0:
                 photo_counter += 1
                 photo_filename = f"motion_captures/capture_{photo_counter}_{current_time}.jpg"
                 cv2.imwrite(photo_filename, frame)

